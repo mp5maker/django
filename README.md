@@ -69,7 +69,7 @@
     pip freeze > requirements.txt
     touch Procfile
 
-        web: gunicorn djangoherokuapp.wsgi --log-file -
+       web: gunicorn config.wsgi --log-file -
 
     pipenv install gunicorn
     pip install whitenoise
