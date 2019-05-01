@@ -43,6 +43,7 @@
 
 ### config.settings ###
 
+    import django_heroku
     INSTALLED_APPS = [ ..., 'pages' ]
     TEMPLATES = [
         {
@@ -60,6 +61,7 @@
         os.path.join(BASE_DIR, 'static')
     ]
     STATIC_URL = '/static/'
+    django_heroku.settings(locals())
 
 ### Root ###
 
@@ -71,3 +73,8 @@
 
     pipenv install gunicorn
     pip install whitenoise
+    pip install django-heroku
+    cd config
+    mkdir static
+    cd static
+    touch .keep
