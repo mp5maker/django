@@ -79,6 +79,7 @@
 
 ### Procfile ###
 
+    release: python manage.py migrate --noinput
     web: gunicorn config.wsgi --log-file -
 
 ### posts.model ###
@@ -145,3 +146,7 @@
     class PostHomeViewPage(TemplateView):
         model = Post
         template_name = 'posts/home.html'
+
+### Update Git Ignore ###
+
+    git rm -r --cached .
