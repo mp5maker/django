@@ -1,4 +1,4 @@
-# Simple App #
+# Django #
 
     pip install django-admin
     pip install virtualenvwrapper
@@ -147,6 +147,12 @@
         model = Post
         template_name = 'posts/home.html'
 
+### posts.tests ###
+
+    from django.urls import reverse
+    python manage.py collectstatic
+    python manage.py test
+
 ### Update Git Ignore ###
 
     git rm -r --cached .
@@ -155,3 +161,13 @@
 
     heroku run python manage.py createsuperuser --app heroku-django-two
     heroku ps --app heroku-django-two
+
+### Pip ###
+
+    pip3 install -upgrade setuptools
+
+### Post Gres ###
+
+    sudo apt-get install postgresql
+    sudo apt-get install python-psycopg2
+    sudo apt-get install libpq-dev
