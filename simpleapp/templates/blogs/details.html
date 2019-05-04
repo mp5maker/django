@@ -1,15 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col p-5 m-5">
+        <div class="col p-5">
             <div>
                 <h4>
-                    Blog Posts
+                    Blog Posts Details
                 </h4>
+                <p>
+                    <code>
+                        <strong>
+                            <sm>
+                                <a href="{% url 'blogs:list' %}">
+                                    <code class="text-primary">
+                                        Go Back
+                                    </code>
+                                </a>
+                            </sm>
+                        </strong>
+                    </code>
+                    <span>/</span>
+                    <code>
+                        <strong>
+                            <sm>
+                                <a href="{% url 'blogs:update' slug=post.slug %}">
+                                    <code class="text-info">
+                                        Update
+                                    </code>
+                                </a>
+                            </sm>
+                        </strong>
+                    </code>
+                </p>
             </div>
-            <div class="card mb-3" style="width:400px">
+            <div class="card mb-3">
                 <div class="card-body">
                     <h4 class="card-title">
                         {{ post.title }}
@@ -27,17 +52,12 @@
                             Revision Date: {{ post.updated_at }}
                         </p>
                         <p>
-                            <a href="{% url 'blogs:list' %}" class="btn btn-primary">
+                            <a href="{% url 'blogs:list' %}" class="btn border">
                                 Author: {{ post.author }}
                             </a>
                         </p>
                     </div>
                 </div>
-            </div>
-            <div>
-                <a class="btn btn-primary" href="{% url 'blogs:list' %}">
-                    Go Back
-                </a>
             </div>
         </div>
     </div>

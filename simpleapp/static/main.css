@@ -44,3 +44,7 @@ form p select {
 form p textarea {
     resize: none;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}

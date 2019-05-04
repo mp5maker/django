@@ -3,10 +3,10 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col p-5 m-5 box-shadow">
+            <div class="col p-5">
                 <div>
                     <h4>
-                        Blog Posts
+                        Blog Posts List
                     </h4>
                     <p>
                         <a href="{% url 'blogs:create' %}">
@@ -14,24 +14,11 @@
                                 Create
                             </code>
                         </a>
-                        <span>
-                            /
-                        </span>
-                        <code class="text-info">
-                            Update
-                        </code>
-                        <span>
-                            /
-                        </span>
-                        <code class="text-danger">
-                            Delete
-                        </code>
                     </p>
                 </div>
                 {% for post in object_list %}
                     <div
-                        class="card mb-3 post-item"
-                        style="width:400px"
+                        class="card mb-3 post-item cursor-pointer"
                         onclick="goToBlogDetails('{{ post.slug }}')"
                         class="card-click">
                         <div class="card-body">
@@ -51,7 +38,7 @@
                                     Revision Date: {{ post.updated_at }}
                                 </p>
                                 <p>
-                                    <a href="{% url 'blogs:list' %}" class="btn btn-primary">
+                                    <a href="{% url 'blogs:list' %}" class="btn border">
                                         Author: {{ post.author }}
                                     </a>
                                 </p>
