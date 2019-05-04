@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col p-5 m-5">
+                <div>
+                    <h4>
+                        Blog Posts
+                    </h4>
+                </div>
+                {% for post in object_list %}
+                    <div
+                        class="card mb-3 post-item"
+                        style="width:400px"
+                        onclick="goToBlogDetails('{{ post.slug }}')"
+                        class="card-click">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                {{ post.title }}
+                            </h4>
+                            <p class="card-text">
+                                {{ post.body }}
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <p>
+                                    Date: {{ post.created_at }}
+                                </p>
+                                <p>
+                                    Revision Date: {{ post.updated_at }}
+                                </p>
+                                <p>
+                                    <a href="{% url 'blogs:list' %}" class="btn btn-primary">
+                                        Author: {{ post.author }}
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

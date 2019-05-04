@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col p-5 m-5">
+            <div>
+                <h4>
+                    Blog Posts
+                </h4>
+            </div>
+            <div class="card mb-3" style="width:400px">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        {{ post.title }}
+                    </h4>
+                    <p class="card-text">
+                        {{ post.body }}
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <p>
+                            Date: {{ post.created_at }}
+                        </p>
+                        <p>
+                            Revision Date: {{ post.updated_at }}
+                        </p>
+                        <p>
+                            <a href="{% url 'blogs:list' %}" class="btn btn-primary">
+                                Author: {{ post.author }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a class="btn btn-primary" href="{% url 'blogs:list' %}">
+                    Go Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
