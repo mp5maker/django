@@ -19,3 +19,28 @@ body {
     transition: all linear 0.25s;
     box-shadow: 0 1px 15px 0 #e0e0e0;
 }
+
+form {
+    border: 1px solid lightgrey;
+}
+
+form p {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+form p:nth-child(2) {
+    margin-top: 25px;
+}
+
+form p input, form p select, form p textarea {
+    width: 100%;
+}
+
+form p select {
+    padding: 5px;
+}
+
+form p textarea {
+    resize: none;
+}

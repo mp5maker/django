@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
@@ -16,6 +17,37 @@
     <title>Simple App</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="{% url 'blogs:list' %}">
+            Simple Application
+        </a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            onclick="navbarToggle('collapsibleNavbar')">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blogs:list'%}">
+                        Blog
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'posts:home'%}">
+                        Post
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'pages:home'%}">
+                        Pages
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     {% block content %}
     {% endblock %}
     <script src="{% static 'main.js' %}"></script>

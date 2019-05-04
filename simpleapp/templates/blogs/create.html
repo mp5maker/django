@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col m-5 m-5 box-shadow">
+                <div>
+                    <h4 class="mt-3">Create New Post</h4>
+                    <p>
+                        <code>
+                            <strong>
+                                <sm>
+                                    <a href="{% url 'blogs:list' %}">
+                                        <code class="text-info">
+                                            Go Back
+                                        </code>
+                                    </a>
+                                </sm>
+                            </strong>
+                        </code>
+                    </p>
+                </div>
+                <div>
+                    <form action="{% url 'blogs:create' %}" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <p>
+                            <input class="btn btn-primary" type="submit" value="Save"/>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
