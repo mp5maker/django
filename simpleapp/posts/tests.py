@@ -2,6 +2,8 @@ from django.test import TestCase
 
 from django.utils.timezone import now
 
+from django.contrib.auth.models import User
+
 from django.template.defaultfilters import slugify
 
 from django.urls import reverse
@@ -47,6 +49,17 @@ class PostHomeViewPageTest(TestCase):
             created_at=self.created_at,
             updated_at=self.updated_at
         )
+
+        self.create_user = User.objects.create_user(
+            username="test",
+            email="test@gmail.com",
+            password="secret78"
+        )
+
+        self.login_user = self.client.post(reverse('login'), {
+            "username": "test",
+            "password": "secret78"
+        })
 
     def text_view_url_exists_at_proper_location(self):
         response = self.client.get('/posts/')

@@ -6,6 +6,8 @@ from django.utils.timezone import now
 
 from django.contrib.auth import get_user_model
 
+from django.contrib.auth.models import User
+
 from django.urls import reverse
 
 from .models import Post
@@ -69,6 +71,15 @@ class BlogListPageViewTest(TestCase):
             created_at=self.created_at,
             updated_at=self.updated_at
         )
+        self.create_user = User.objects.create_user(
+            username="testTwo",
+            email="test@gmail.com",
+            password="secret78"
+        )
+        self.login_user = self.client.post(reverse('login'), {
+            "username": "testTwo",
+            "password": "secret78"
+        })
         self.url = self.client.get('/blogs/')
         self.reverseUrl = self.client.get(reverse('blogs:list'))
 
@@ -101,6 +112,15 @@ class BlogDetailPageViewTest(TestCase):
             created_at=self.created_at,
             updated_at=self.updated_at,
         )
+        self.create_user = User.objects.create_user(
+            username="testTwo",
+            email="test@gmail.com",
+            password="secret78"
+        )
+        self.login_user = self.client.post(reverse('login'), {
+            "username": "testTwo",
+            "password": "secret78"
+        })
         self.url=self.client.get('/blogs/' + self.slug + "/")
         self.reverseUrl = self.client.get(
             reverse("blogs:details", kwargs={"slug": self.slug})
@@ -126,6 +146,15 @@ class BlogCreatePageViewTest(TestCase):
             password="secret89"
         )
         self.body="great day"
+        self.create_user = User.objects.create_user(
+            username="testTwo",
+            email="test@gmail.com",
+            password="secret78"
+        )
+        self.login_user = self.client.post(reverse('login'), {
+            "username": "testTwo",
+            "password": "secret78"
+        })
         self.response = self.client.post(reverse('blogs:create'), {
             "title": self.title,
             "body": self.body,
@@ -156,6 +185,15 @@ class BlogUpdatePageViewTest(TestCase):
             body=self.body,
             author=self.author
         )
+        self.create_user = User.objects.create_user(
+            username="testTwo",
+            email="test@gmail.com",
+            password="secret78"
+        )
+        self.login_user = self.client.post(reverse('login'), {
+            "username": "testTwo",
+            "password": "secret78"
+        })
         self.response = self.client.post(reverse('blogs:update',
             kwargs={"slug" : self.slug}), {
             "title": "this is updated test",
@@ -182,6 +220,15 @@ class BlogDeletePageViewTest(TestCase):
             body=self.body,
             author=self.author
         )
+        self.create_user = User.objects.create_user(
+            username="testTwo",
+            email="test@gmail.com",
+            password="secret78"
+        )
+        self.login_user = self.client.post(reverse('login'), {
+            "username": "testTwo",
+            "password": "secret78"
+        })
     def test_blog_delete_page_view(self):
         delete_page = self.client.get(reverse('blogs:delete', kwargs={"slug": self.slug}))
         response = self.client.post(reverse('blogs:delete', kwargs={"slug": self.slug}))
