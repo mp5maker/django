@@ -126,4 +126,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+LOGIN_REDIRECT_URL = 'blogs:list'
+LOGOUT_REDIRECT_URL = 'pages:home'
+
 django_heroku.settings(locals())
