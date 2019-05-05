@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col p-5">
+                <div>
+                    <h4>Sign Up</h4>
+                    <p>
+                        <a href="{% url 'blogs:list' %}">
+                            <code>
+                                Go Back
+                            </code>
+                        </a>
+                    </p>
+                </div>
+                <div class="box-shadow">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <p>
+                            <input type="submit" class="btn btn-primary" value="Sign Up"/>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

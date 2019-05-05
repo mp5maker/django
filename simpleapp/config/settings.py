@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     # Apps
     'pages',
     'posts',
-    'blogs'
+    'blogs',
+    'accounts',
 ]
 
 MIDDLEWARE = [
