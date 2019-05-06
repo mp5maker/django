@@ -1,4 +1,4 @@
-# Django #
+# Simple App #
 
     pip install django-admin
     pip install virtualenvwrapper
