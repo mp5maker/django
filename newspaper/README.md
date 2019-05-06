@@ -1,8 +1,13 @@
 # Newspaper #
 
 ### config.settings ###
+    INSTALLED_APPS = [
+        'crispy_forms',
+        ...
+    ]
 
     AUTH_USER_MODEL = 'users.CustomUser'
+    CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ### users.model ###
 
@@ -36,3 +41,28 @@
 
         python manage.py makemigrations
         python manage.py migrate
+
+## Crispy Forms ###
+
+        pipenv install django-crispy-forms
+
+## templates.registration.login
+        {% extends 'base.html' %}
+        {% block title %}
+        <div>
+                <h4>
+                Login
+                </h4>
+        </div>
+        {% endblock %}
+        {% block content %}
+        <div class="box-shadow">
+                <form method="POST" action="">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <p>
+                    <input type="submit" class="btn btn-primary" value="Submit"/>
+                </p>
+                </form>
+        </div>
+        {% endblock %}

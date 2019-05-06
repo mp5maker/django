@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     # Add Ons
     'django_extensions',
     'whitenoise.runserver_nostatic',
+    'crispy_forms',
 
     # Apps
     'pages',
@@ -129,5 +130,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGIN_REDIRECT_URL = 'pages:home'
 LOGOUT_REDIRECT_URL = 'pages:home'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 django_heroku.settings(locals())
