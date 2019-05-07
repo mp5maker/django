@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'pages',
     'users',
     'articles',
+    'comments'
 ]
 
 MIDDLEWARE = [
@@ -137,7 +138,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.com'
 EMAIL_HOST_USER = 'mp5maker'
-EMAIL_HOST_PASSWORD = 'enigma1991'
+EMAIL_HOST_PASSWORD = 'boom'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
