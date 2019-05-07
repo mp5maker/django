@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<div>
+    <h4>Article Details</h4>
+</div>
+<div>
+    <p>
+        <a href="{% url 'articles:list' %}">
+            <code class="text-info">
+                Go Back
+            </code>
+        </a>
+        <span>/</span>
+        <a href="{% url 'articles:update' slug=article.slug  %}">
+            <code class="text-primary">
+                Update
+            </code>
+        </a>
+        <span>/</span>
+        <a href="{% url 'articles:delete' slug=article.slug %}">
+            <code class="text-danger">
+                Delete
+            </code>
+        </a>
+    </p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">
+                {{ article.title }}
+            </h4>
+            <p class="card-text">
+                {{ article.body }}
+            </p>
+        </div>
+        <div class="card-footer">
+            <p>
+                <a href="" class="card-link">
+                    <code>
+                        <span class="badge badge-secondary">
+                            Author : {{ article.author.username }}
+                        </span>
+                        <span class="badge badge-warning">
+                            Email : {{ article.author.email }}
+                        </span>
+                    </code>
+                </a>
+            </p>
+            <p>
+                <code>
+                    Published Date: {{ article.created_at }}
+                </code>
+            </p>
+            <p>
+                <code>
+                    Update On: {{ article.updated_at }}
+                </code>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
