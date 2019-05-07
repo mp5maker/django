@@ -8,6 +8,12 @@
 
     AUTH_USER_MODEL = 'users.CustomUser'
     CRISPY_TEMPLATE_PACK = 'bootstrap4'
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_HOST = 'smtp.sendgrid.com'
+    EMAIL_HOST_USER = 'mp5maker'
+    EMAIL_HOST_PASSWORD = 'enigma1991'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
 
 ### users.model ###
 
