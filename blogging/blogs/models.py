@@ -10,6 +10,8 @@ from django.template.defaultfilters import slugify
 
 from .enums import STATUS_CHOICES
 
+from django.urls import reverse
+
 from .managers import PublishedManager
 
 
@@ -39,6 +41,9 @@ class Post(models.Model):
             self.created = now()
         self.updated = now()
         return super(Post, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blogs:posts-details', kwargs={"slug": self.slug })
 
     class Meta:
         ordering = ('-publish',)
