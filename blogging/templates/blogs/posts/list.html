@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<div class="mb-1">
+    <div>
+        <h4>
+            Post List
+        </h4>
+    </div>
+    <div>
+        <a href="{% url 'pages:home' %}">
+            <code class="text-primary">
+                Go Home
+            </code>
+        </a>
+        <span>/</span>
+        <a href="#">
+            <code class="text-info">
+                Create
+            </code>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div>
+        {% for post in posts %}
+            <div class="card box-shadow-hover mb-3" onclick="goToPostDetailsPage('{{post.slug}}')">
+                <div class="card-body">
+                    <div class="card-text">
+                        <h6>{{ post.title }}</h6>
+                    </div>
+                    <div class="card-text">
+                        <p>{{ post.body }}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-text">
+                        Author: {{ post.author.username }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
