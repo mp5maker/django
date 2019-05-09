@@ -37,9 +37,13 @@
     post = Post.objects.get(id=1)
     post.delete()
 
-### Custom Model Manager ###
+### blogs.manager ###
 
     from django.db import models
 
     class PublishedManager(models.Manager):
         return super(PublishedManager, self).get_queryset().filter(status='draft')
+
+### templates.blogs.posts.list.html ###
+
+    <p>{{ post.body|truncatewords:30|linebreaks }}</p>

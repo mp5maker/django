@@ -4,8 +4,8 @@
     window.onload = init;
 
     function init() {
-        window.goToPostDetailsPage = (slug) => {
-            window.location.href = `/blogs/posts/${slug}`;
+        window.goToPostDetailsPage = ({year, month, day, slug} = {}) => {
+            window.location.href = `/blogs/posts/${year}/${month}/${day}/${slug}`;
         }
     }
 })()

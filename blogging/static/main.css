@@ -16,6 +16,24 @@ footer {
     width: 100%;
 }
 
+.common-header div {
+    display: inline-block;
+}
+
+.common-header div:first-child {
+    margin-top: 10px;
+}
+
+.common-header div:nth-child(2) {
+    float: right;
+}
+
+.common-header::before, .common-header::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
 .box-shadow {
     box-shadow: 0 1px 15px 0 #d6d6d6;
 }

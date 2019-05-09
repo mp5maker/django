@@ -43,7 +43,12 @@ class Post(models.Model):
         return super(Post, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('blogs:posts-details', kwargs={"slug": self.slug })
+        return reverse('blogs:posts-details', kwargs={
+            "slug": self.slug,
+            "year": self.publish__year,
+            "month": self.publish__month,
+            "day": self.publish__day
+        })
 
     class Meta:
         ordering = ('-publish',)

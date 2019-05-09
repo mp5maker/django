@@ -7,24 +7,50 @@
             Post Details
         </h4>
     </div>
-    <div>
-        <a href="{% url 'blogs:posts-list' %}">
-            <code class="text-primary">
-                Go Back
-            </code>
-        </a>
-        <span>/</span>
-        <a href="#">
-            <code class="text-info">
-                Update
-            </code>
-        </a>
-        <span>/</span>
-        <a href="#">
-            <code class="text-danger">
-                Delete
-            </code>
-        </a>
+    <div class="common-header">
+        <div>
+            <a href="{% url 'blogs:posts-list' %}">
+                <code class="text-primary">
+                    Go Back
+                </code>
+            </a>
+            <span>/</span>
+            <a href="#">
+                <code class="text-info">
+                    Update
+                </code>
+            </a>
+            <span>/</span>
+            <a href="#">
+                <code class="text-danger">
+                    Delete
+                </code>
+            </a>
+        </div>
+        <div>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link">
+                        {{ post.publish.year }}
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link">
+                        {{ post.publish.month }}
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link">
+                        {{ post.publish.day }}
+                    </a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link">
+                        {{ post.slug }}
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}

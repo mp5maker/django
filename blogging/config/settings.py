@@ -137,4 +137,6 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_REDIRECT_URL = 'pages:home'
 LOGOUT_REDIRECT_URL = 'pages:home'
 
+PAGINATION_SIZE = 4
+
 django_heroku.settings(locals())
