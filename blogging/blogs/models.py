@@ -45,9 +45,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blogs:posts-details', kwargs={
             "slug": self.slug,
-            "year": self.publish__year,
-            "month": self.publish__month,
-            "day": self.publish__day
+            "year": self.publish.year,
+            "month": self.publish.month,
+            "day": self.publish.day
         })
 
     class Meta:

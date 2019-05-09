@@ -1,5 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 
+from django.urls import reverse_lazy
+
+from django.views.generic import ListView, DetailView
+
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.conf import settings
@@ -30,3 +36,23 @@ def post_details_view(request, *args, **kwargs):
         slug=slug,
         status='published')
     return render(request, 'blogs/posts/details.html', {"post": post})
+
+class PostListView(ListView):
+    model = Post
+    context_object_name = 'posts'
+    paginate_by = settings.PAGINATION_SIZE
+    template_name = 'blogs/posts/list.html'
+
+class PostCreateView(CreateView):
+    template_name = 'blogs/posts/create.html'
+    model = Post
+    fields = ('title', 'body', 'author', 'status',)
+
+class PostUpdateView(UpdateView):
+    template_name = 'blogs/posts/update.html'
+    model = Post
+    fields = ('title', 'body', 'author', 'status',)
+class PostDeleteView(DeleteView):
+    template_name = 'blogs/posts/delete.html'
+    model = Post
+    success_url = reverse_lazy('blogs:posts-list')

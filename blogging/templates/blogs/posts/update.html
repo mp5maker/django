@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+<div>
+    <h4>
+        Post Update
+    </h4>
+</div>
+<div>
+    <a href="{% url 'blogs:posts-list' %}">
+        <code class="text-primary">
+            Go Back
+        </code>
+    </a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <p>
+            <input type="submit" class="btn btn-primary" value="Confirm" />
+        </p>
+    </form>
+</div>
+{% endblock %}

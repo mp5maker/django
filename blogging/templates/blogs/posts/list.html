@@ -15,14 +15,15 @@
                 </code>
             </a>
             <span>/</span>
-            <a href="#">
+            <a href="{% url 'blogs:posts-create' %}">
                 <code class="text-info">
                     Create
                 </code>
             </a>
         </div>
+        <!-- {% include 'layouts/pagination.html' with pages=posts %}  -->
         <div>
-            {% include 'layouts/pagination.html' with pages=posts %}
+            {% include 'layouts/pagination.html' with pages=page_obj %}
         </div>
     </div>
 </div>

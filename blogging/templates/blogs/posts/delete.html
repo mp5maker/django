@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+<div>
+    <h4>
+        Delete Post
+    </h4>
+</div>
+<div>
+    <a href="{% url 'blogs:posts-list' %}">
+        <code class="text-primary">
+            Go Back
+        </code>
+    </a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="box-shadow p-3">
+    <div>
+        <p>
+            Are you sure you want to delete {{ post.title }} ?
+        </p>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy}}
+            <p>
+                <input type="submit" value="Yes" class="btn btn-danger" />
+                <a href="{% url 'blogs:posts-list' %}" class="btn btn-primary">
+                    No
+                </a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}
