@@ -78,7 +78,16 @@
                     Published: {{ post.publish }}
                 </div>
                 <div>
-                    Updated: {{ post.updated }}
+                    <div class="row">
+                        <div class="col">
+                            Updated: {{ post.updated }}
+                        </div>
+                        <div class="col text-right">
+                            <a href="{% url 'blogs:posts-email-share' post_id=post.id %}">
+                                <i class="fas fa-share-alt"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
