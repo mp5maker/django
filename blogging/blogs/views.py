@@ -12,6 +12,8 @@ from django.conf import settings
 
 from django.core.mail import send_mail
 
+from django.db.models import Count
+
 from taggit.models import Tag
 
 from .models import Post
@@ -77,11 +79,22 @@ def post_details_view(request, *args, **kwargs):
             new_comment.save()
     else:
         comment_form = CommentForm()
+
+    post_tags_ids = post.tags.values_list('id', flat=True)
+    similar_posts = Post.published.filter(tags__in=post_tags_ids)
+    similar_posts = similar_posts.annotate(
+        same_tags=Count('tags')
+    ).order_by(
+        '-same_tags',
+        '-publish'
+    )[:4]
+
     return render(request, 'blogs/posts/details.html', {
         "post": post,
         "comments": comments,
         "new_comment": new_comment,
-        "comment_form": comment_form
+        "comment_form": comment_form,
+        "similar_posts": similar_posts
     })
 
 class PostListView(ListView):

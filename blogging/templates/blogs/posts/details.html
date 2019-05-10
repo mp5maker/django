@@ -140,6 +140,26 @@
                 </p>
             {% endfor %}
         </div>
+        <div class="m-3">
+            <div class="common-header">
+                <div>
+                    <h5>
+                        Similar Posts
+                    </h5>
+                </div>
+            </div>
+            {% for similar_post in similar_posts %}
+                <span>
+                    <a href="{{ similar_post.get_absolute_url }}">
+                        {{ similar_post.title }}
+                    </a>
+                </span>
+            {% empty %}
+                <p>
+                    There are no similar posts yet!
+                </p>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}
