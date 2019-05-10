@@ -12,6 +12,8 @@ from .enums import STATUS_CHOICES
 
 from django.urls import reverse
 
+from taggit.managers import TaggableManager
+
 from .managers import PublishedManager
 
 
@@ -30,6 +32,7 @@ class Post(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     objects = models.Manager()
     published = PublishedManager()
+    tags = TaggableManager()
 
     def __str__(self):
         return self.title[:50]

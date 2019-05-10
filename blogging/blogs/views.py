@@ -12,6 +12,8 @@ from django.conf import settings
 
 from django.core.mail import send_mail
 
+from taggit.models import Tag
+
 from .models import Post
 
 from .forms import (
@@ -19,9 +21,16 @@ from .forms import (
     CommentForm
 )
 
-
 def post_list_view(request, *args, **kwargs):
-    posts = Post.objects.all().filter(status="published")
+    posts = Post.published.all()
+
+    tag_slug = kwargs.get('slug')
+    tag = None
+    if tag_slug:
+        tag_slug = kwargs.get('slug').split('-')[0]
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        posts = posts.filter(tags__in=[tag])
+
     paginator = Paginator(posts, settings.PAGINATION_SIZE)
     requested_page_number = request.GET.get('page')
     try:
@@ -30,7 +39,11 @@ def post_list_view(request, *args, **kwargs):
         posts = paginator.get_page(1)
     except EmptyPage:
         posts = paginator.get_page(paginator.num_pages)
-    return render(request, 'blogs/posts/list.html', { "posts": posts })
+
+    return render(request, 'blogs/posts/list.html', {
+        "posts": posts,
+        "tag": tag
+    })
 
 def post_details_view(request, *args, **kwargs):
     slug = kwargs.get('slug')

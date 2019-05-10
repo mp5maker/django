@@ -5,15 +5,28 @@
     <div>
         <h4>
             Post List
+            <span>
+                {% if tag %}
+                    with "{{ tag.name }}"
+                {% endif %}
+            </span>
         </h4>
     </div>
     <div class="common-header">
         <div>
-            <a href="{% url 'pages:home' %}">
-                <code class="text-primary">
-                    Go Home
-                </code>
-            </a>
+            {% if tag %}
+                <a href="{% url 'blogs:posts-list' %}">
+                    <code class="text-primary">
+                        Go Back
+                    </code>
+                </a>
+            {% else %}
+                <a href="{% url 'pages:home' %}">
+                    <code class="text-primary">
+                        Go Home
+                    </code>
+                </a>
+            {% endif %}
             <span>/</span>
             <a href="{% url 'blogs:posts-create' %}">
                 <code class="text-info">
@@ -21,9 +34,9 @@
                 </code>
             </a>
         </div>
-        <!-- {% include 'layouts/pagination.html' with pages=posts %}  -->
+        <!-- {% include 'layouts/pagination.html' with pages=page_obj %} -->
         <div>
-            {% include 'layouts/pagination.html' with pages=page_obj %}
+            {% include 'layouts/pagination.html' with pages=posts %}
         </div>
     </div>
 </div>
@@ -41,8 +54,19 @@
                     slug: '{{post.slug}}',
                 })">
                 <div class="card-body">
-                    <div class="card-text">
-                        <h6>{{ post.title }}</h6>
+                    <div class="card-text common-header">
+                        <div>
+                            <h6>{{ post.title }}</h6>
+                        </div>
+                        <div>
+                            {% if post.tags.all %}
+                                <a href="{% url 'blogs:posts-list-tag' post.tags.all|join:'-' %}">
+                                    <span class="badge badge-primary">
+                                        {{ post.tags.all|join:", " }}
+                                    </span>
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="card-text">
                         <p>{{ post.body|truncatewords:30|linebreaks }}</p>

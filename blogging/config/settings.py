@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_extensions',
     'whitenoise.runserver_nostatic',
+    'taggit',
 
     # Apps
     'accounts',
