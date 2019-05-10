@@ -52,4 +52,41 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-publish',)
+        
+    
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='comments'
+    )
+    slug=models.SlugField(blank=True)
+    name=models.CharField(max_length=200)
+    email=models.EmailField()
+    body=models.TextField()
+    created=models.DateTimeField(blank=True)
+    updated=models.DateTimeField(blank=True)
+    active=models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created', )
+    
+    def __str__(self):
+        return self.title[:50]
+    
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.id[:50])
+            self.created = now()
+        self.updated = now()
+        return super(Comment, self).save(*args, **kwargs)
+
+    def get_absolute_url(self, *args, **kwargs):
+        return reverse("blogs:posts-detail", kwargs = {
+            "slug": self.post.slug,
+            "year": self.post.publish.year,
+            "month": self.post.publish.month,
+            "day": self.post.publish.month
+        })
+
 
