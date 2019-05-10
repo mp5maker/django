@@ -99,4 +99,21 @@
             </div>
         </div>
     </div>
+    <div>
+        <div class="card box-shadow-hover">
+            <div class="m-3">
+                <div class="common-header">
+                    <h4>
+                        Most Commented Posts
+                    </h4>
+                </div>
+                <div>
+                    {% show_most_commented_posts %}
+                </div>
+                <div>
+                    This site contains {% total_posts %} posts so far </p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
