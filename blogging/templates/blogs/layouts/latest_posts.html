@@ -1,0 +1,11 @@
+{% for post in latest_posts %}
+<div class="card horizontal" style="width: 18rem;">
+    <div class="card-body">
+        <div class="card-subtitle">
+            <a href="{{ post.get_absolute_url }}">
+                {{ post.title }}
+            </a>
+        </div>
+    </div>
+</div>
+{% endfor %}

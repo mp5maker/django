@@ -12,8 +12,14 @@ body > .container-fluid {
 }
 
 footer {
+    border-top: 1px solid #d6d6d6;
     height: 60px;
     width: 100%;
+}
+
+footer > div {
+    height: 100%;
+    margin-top: 25px;
 }
 
 .common-header div {
@@ -32,6 +38,13 @@ footer {
     content: '';
     clear: both;
     display: block;
+}
+
+.card.horizontal {
+    display: inline-block !important;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .box-shadow {
