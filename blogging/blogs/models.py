@@ -52,8 +52,8 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-publish',)
-        
-    
+
+
 class Comment(models.Model):
     post = models.ForeignKey(
         Post,
@@ -70,13 +70,13 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('created', )
-    
+
     def __str__(self):
-        return self.title[:50]
-    
+        return self.name[:50]
+
     def save(self, *args, **kwargs):
+        self.slug = slugify(self.name[:50])
         if not self.id:
-            self.slug = slugify(self.id[:50])
             self.created = now()
         self.updated = now()
         return super(Comment, self).save(*args, **kwargs)

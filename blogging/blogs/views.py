@@ -14,7 +14,10 @@ from django.core.mail import send_mail
 
 from .models import Post
 
-from .forms import EmailPostForm
+from .forms import (
+    EmailPostForm,
+    CommentForm
+)
 
 
 def post_list_view(request, *args, **kwargs):
@@ -34,19 +37,48 @@ def post_details_view(request, *args, **kwargs):
     year = kwargs.get('year')
     month = kwargs.get('month')
     day = kwargs.get('day')
+
     post = get_object_or_404(Post,
         publish__year=year,
         publish__month=month,
         publish__day=day,
         slug=slug,
         status='published')
-    return render(request, 'blogs/posts/details.html', {"post": post})
+
+    comments = post.comments.filter(active=True)
+    comments_paginator = Paginator(comments, 2)
+    requested_page_number = request.GET.get('page')
+    try:
+        comments = comments_paginator.get_page(requested_page_number)
+    except PageNotAnInteger:
+        comments = comments_paginator.get_page(1)
+    except EmptyPage:
+        comments = comments_paginator.get_page(comments_paginator.num_pages)
+
+    new_comment = None
+    if (request.method == 'POST'):
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    return render(request, 'blogs/posts/details.html', {
+        "post": post,
+        "comments": comments,
+        "new_comment": new_comment,
+        "comment_form": comment_form
+    })
 
 class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
     paginate_by = settings.PAGINATION_SIZE
     template_name = 'blogs/posts/list.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(status="published")
 
 class PostCreateView(CreateView):
     template_name = 'blogs/posts/create.html'
@@ -57,6 +89,7 @@ class PostUpdateView(UpdateView):
     template_name = 'blogs/posts/update.html'
     model = Post
     fields = ('title', 'body', 'author', 'status',)
+
 class PostDeleteView(DeleteView):
     template_name = 'blogs/posts/delete.html'
     model = Post

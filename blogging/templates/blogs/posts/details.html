@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
 <div class="mb-1">
     <div>
@@ -90,6 +92,53 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="card-footer mt-5">
+            <div class="common-header">
+                <div>
+                    <h5>
+                        Add Comment
+                    </h5>
+                </div>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ comment_form|crispy }}
+                <p>
+                    <input type="submit" class="btn btn-primary" value = "Add Comment" />
+                </p>
+            </form>
+        </div>
+        <div class="m-3">
+            <div class="common-header">
+                <div>
+                    <h5>
+                        Comments
+                    </h5>
+                </div>
+                <div>
+                    {% include 'layouts/pagination.html' with pages=comments %}
+                </div>
+            </div>
+            {% for comment in comments %}
+                <div class="card">
+                    <div class="card-body">
+                        <code class="text-primary">
+                            Name: {{ comment.name }}
+                        </code>
+                        <code class="text-info">
+                            Email: {{ comment.email }}
+                        </code>
+                    </div>
+                    <div class="card-footer">
+                        {{ comment.body|linebreaks }}
+                    </div>
+                </div>
+            {% empty %}
+                <p>
+                    There are no comments yet!
+                </p>
+            {% endfor %}
         </div>
     </div>
 </div>
