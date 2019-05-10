@@ -27,9 +27,9 @@ def post_list_view(request, *args, **kwargs):
     tag_slug = kwargs.get('slug')
     tag = None
     if tag_slug:
-        tag_slug = kwargs.get('slug').split('-')[0]
-        tag = get_object_or_404(Tag, slug=tag_slug)
-        posts = posts.filter(tags__in=[tag])
+        tag_slug = kwargs.get('slug').split("-")
+        tag = list(Tag.objects.values('id').filter(slug__in=tag_slug))
+        posts = posts.filter(tags__in=[t['id'] for t in tag]).distinct()
 
     paginator = Paginator(posts, settings.PAGINATION_SIZE)
     requested_page_number = request.GET.get('page')
