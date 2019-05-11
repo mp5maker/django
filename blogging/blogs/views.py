@@ -14,6 +14,8 @@ from django.core.mail import send_mail
 
 from django.db.models import Count
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.contrib.postgres.search import (
     SearchVector,
     SearchQuery,
@@ -120,17 +122,20 @@ class PostListView(ListView):
     def get_queryset(self):
         return Post.objects.filter(status="published")
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
+    redirect_url = reverse_lazy('login')
     template_name = 'blogs/posts/create.html'
     model = Post
     fields = ('title', 'body', 'author', 'status',)
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    redirect_url = reverse_lazy('login')
     template_name = 'blogs/posts/update.html'
     model = Post
     fields = ('title', 'body', 'author', 'status',)
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    redirect_url = reverse_lazy('login')
     template_name = 'blogs/posts/delete.html'
     model = Post
     success_url = reverse_lazy('blogs:posts-list')

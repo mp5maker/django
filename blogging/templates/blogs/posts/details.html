@@ -18,18 +18,20 @@
                     Go Back
                 </code>
             </a>
-            <span>/</span>
-            <a href="{% url 'blogs:posts-update' year=post.publish.year month=post.publish.month day=post.publish.day slug=post.slug %}">
-                <code class="text-info">
-                    Update
-                </code>
-            </a>
-            <span>/</span>
-            <a href="{% url 'blogs:posts-delete' year=post.publish.year month=post.publish.month day=post.publish.day slug=post.slug %}">
-                <code class="text-danger">
-                    Delete
-                </code>
-            </a>
+            {% if user.is_authenticated %}
+                <span>/</span>
+                <a href="{% url 'blogs:posts-update' year=post.publish.year month=post.publish.month day=post.publish.day slug=post.slug %}">
+                    <code class="text-info">
+                        Update
+                    </code>
+                </a>
+                <span>/</span>
+                <a href="{% url 'blogs:posts-delete' year=post.publish.year month=post.publish.month day=post.publish.day slug=post.slug %}">
+                    <code class="text-danger">
+                        Delete
+                    </code>
+                </a>
+            {% endif %}
         </div>
         <div>
             <ul class="pagination">

@@ -33,12 +33,14 @@
                     </code>
                 </a>
             {% endif %}
+            {% if user.is_authenticated %}
             <span>/</span>
             <a href="{% url 'blogs:posts-create' %}">
                 <code class="text-info">
                     Create
                 </code>
             </a>
+            {% endif %}
             <span>/</span>
             <a href="{% url 'blogs:posts-search' %}">
                 <code class="text-success">
