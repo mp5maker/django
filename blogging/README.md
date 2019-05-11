@@ -48,16 +48,37 @@
 
     <p>{{ post.body|truncatewords:30|linebreaks }}</p>
 
-### Pg Admin ###
+### Full Text Search ###
+
+    1. Simple Search Lookups
+    Looking through only one column
+    Post.objects.filter(body__search='django')
+
+    2. Search Vector
+    Looking through multiple columns
+    Post.objects.annotate(search=SimpleVector('title', 'body')).filter(search='django')
+
+    3. Search Query (Stemming)
+    Looking through each words in the search
+
+    4. Search Rank (Stemming)
+    Measuring the number of occurance
+
+    5. Trigram Similarity
+    A trigram is a group of three consecutive characters. We can measure
+    the similarity of two string by counting the number of trigrams they share
+
+### Pg Admin Installlation ###
 
     sudo apt-get install libpq-dev python-dev
     sudo apt-get install postgresql postgresql-contrib
+
+### Pg Admin Settings ###
 
     sudo passwd postgres
     sudo -u postgres psql
     ALTER USER postgres PASSWORD 'postgres';
     locate pg_hba.conf
-    copy /etc/postgresql/10/main/pg_hba.conf
     sudo nano /etc/postgresql/10/main/pg_hba.conf
 
     local | all | postgres | peer
@@ -67,8 +88,13 @@
     sudo service postgresql restart
 
     su postgres
-
     psql
     CREATE USER sample_user WITH PASSWORD 'sample_password';
     CREATE DATABASE sample_database WITH OWNER sample_user;
     GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO sample_user;
+
+## Adding Triagram Similarity to Postgres ###
+
+    su postgres
+    psql sample_database;
+    CREATE EXTENSION pg_trgm;
