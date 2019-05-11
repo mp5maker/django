@@ -9,7 +9,11 @@
             Post List
             <span>
                 {% if tag %}
-                    with "{{ tag.name }}"
+                    with "
+                    {% for t in tag %}
+                        {{ t.slug }}
+                    {% endfor %}
+                    "
                 {% endif %}
             </span>
         </h4>
@@ -71,7 +75,7 @@
                         </div>
                     </div>
                     <div class="card-text">
-                        <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+                        <p>{{ post.body|markdown|truncatewords:30|linebreaks }}</p>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -99,7 +103,7 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="mt-3">
         <div class="card box-shadow-hover">
             <div class="m-3">
                 <div class="common-header">

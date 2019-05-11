@@ -28,10 +28,13 @@ def post_list_view(request, *args, **kwargs):
 
     tag_slug = kwargs.get('slug')
     tag = None
+    tag_list = None
     if tag_slug:
         tag_slug = kwargs.get('slug').split("-")
-        tag = list(Tag.objects.values('id').filter(slug__in=tag_slug))
-        posts = posts.filter(tags__in=[t['id'] for t in tag]).distinct()
+        tag = list(Tag.objects.filter(slug__in=tag_slug))
+        print(tag)
+        tag_list = list(Tag.objects.values('id').filter(slug__in=tag_slug))
+        posts = posts.filter(tags__in=[t['id'] for t in tag_list]).distinct()
 
     paginator = Paginator(posts, settings.PAGINATION_SIZE)
     requested_page_number = request.GET.get('page')
@@ -41,6 +44,7 @@ def post_list_view(request, *args, **kwargs):
         posts = paginator.get_page(1)
     except EmptyPage:
         posts = paginator.get_page(paginator.num_pages)
+
 
     return render(request, 'blogs/posts/list.html', {
         "posts": posts,

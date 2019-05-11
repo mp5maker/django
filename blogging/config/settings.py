@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'whitenoise.runserver_nostatic',
     'taggit',
+    'markdownx',
 
     # Apps
     'accounts',

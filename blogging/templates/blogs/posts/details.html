@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load blog_tags %}
+
 {% load crispy_forms_tags %}
 
 {% block title %}
@@ -65,7 +67,7 @@
                 <h5>{{ post.title }}</h5>
             </div>
             <div class="card-text">
-                <p>{{ post.body }}</p>
+                <p>{{ post.body|markdown }}</p>
             </div>
         </div>
         <div class="card-footer">
