@@ -19,11 +19,13 @@
             It is a simple blogging website with many extraordinary features
         </p>
     </div>
+    {% verbatim %}
     <div>
-        <a href="{% url 'blogs:posts-feed' %}">
-            Subscribe to my RSS feed
+        <a onclick="fetchFeed()" class="text-primary cursor-pointer">
+            <i class="far fa-copy"></i>
         </a>
     </div>
+    {% endverbatim %}
 </div>
 <div>
     <div class="card box-shadow-hover">

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+<div>
+    <div>
+        <div>
+            <h4>
+                Search Posts
+            </h4>
+        </div>
+    </div>
+    <div class="common-header">
+        <div>
+            <a href="{% url 'blogs:posts-list' %}">
+                <code class="text-primary">
+                    Go Back
+                </code>
+            </a>
+        </div>
+        {% if query %}
+            <div>
+                {% with results.count as total_results %}
+                    <span>
+                        Found {{ total_results }}
+                    </span>
+                {% endwith %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        <form method="GET">
+            {{ form|crispy }}
+            <p>
+                <input
+                    value="Search"
+                    type="submit"
+                    class="btn btn-success">
+            </p>
+        </form>
+    </div>
+
+    {% for post in results %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4>
+                    <a href="{{ post.get_absolute_url }}">
+                        {{ post.title }}
+                    </a>
+                </h4>
+            </div>
+        </div>
+    {% empty %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <p>
+                    There are no results for your query!
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

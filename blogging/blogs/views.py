@@ -14,13 +14,16 @@ from django.core.mail import send_mail
 
 from django.db.models import Count
 
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+
 from taggit.models import Tag
 
 from .models import Post
 
 from .forms import (
     EmailPostForm,
-    CommentForm
+    CommentForm,
+    SearchForm
 )
 
 def post_list_view(request, *args, **kwargs):
@@ -32,7 +35,6 @@ def post_list_view(request, *args, **kwargs):
     if tag_slug:
         tag_slug = kwargs.get('slug').split("-")
         tag = list(Tag.objects.filter(slug__in=tag_slug))
-        print(tag)
         tag_list = list(Tag.objects.values('id').filter(slug__in=tag_slug))
         posts = posts.filter(tags__in=[t['id'] for t in tag_list]).distinct()
 
@@ -48,7 +50,6 @@ def post_list_view(request, *args, **kwargs):
         posts = paginator.get_page(1)
     except EmptyPage:
         posts = paginator.get_page(paginator.num_pages)
-
 
     return render(request, 'blogs/posts/list.html', {
         "posts": posts,
@@ -161,3 +162,27 @@ def post_share(request, *args, **kwargs):
         "form": form,
         "sent": sent
     })
+
+def post_search(request, *args, **kwargs):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            search_vector = SearchVector('title', weight="A") + SearchVector('body', weight="B")
+            search_query = SearchQuery(query)
+            results = Post.objects.annotate(
+                search=search_vector,
+                rank=SearchRank(search_vector, search_query)
+            ).filter(search=search_query).order_by('-rank')
+    return render(
+        request,
+        'blogs/posts/search.html',
+        {
+            "form": form,
+            "query": query,
+            "results": results
+        }
+    )

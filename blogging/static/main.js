@@ -21,5 +21,24 @@
                 window.location.href = `/blogs/posts/?search=${searchBar.value}`;
             }
         }
+
+        window.fetchFeed = () => {
+            const copyToClipboard = (responseText) => {
+                const inputElement = document.createElement('input')
+                inputElement.value = responseText;
+                document.body.appendChild(inputElement)
+                inputElement.select()
+                document.execCommand("copy")
+                document.body.removeChild(inputElement)
+            }
+
+            const fetchFeedAsync = async () => {
+                let response = await fetch(url)
+                let responseText = await response.text()
+                return await copyToClipboard(responseText)
+            }
+
+            fetchFeedAsync()
+        }
     }
 })()

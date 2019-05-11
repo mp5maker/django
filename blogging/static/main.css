@@ -54,3 +54,7 @@ footer > div {
 .box-shadow-hover:hover {
     box-shadow: 0 1px 15px 0 #d6d6d6;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}

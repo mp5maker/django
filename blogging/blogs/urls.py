@@ -4,13 +4,14 @@ from .views import (
     post_list_view,
     post_details_view,
     post_share,
+    post_search,
     PostListView,
     PostCreateView,
     PostUpdateView,
     PostDeleteView
 )
 
-from .feeds import LatestPostsFeed
+from .feeds import AtomSiteNewsFeed
 
 app_name = "blogs"
 
@@ -31,6 +32,7 @@ urlpatterns = [
         PostDeleteView.as_view(),
         name="posts-delete"
     ),
+    path('posts/search/', post_search, name="posts-search")
 ]
 
 # Email
@@ -38,6 +40,7 @@ urlpatterns += [
     path('posts/share/<int:post_id>', post_share, name="posts-email-share")
 ]
 
+# Feed
 urlpatterns += [
-    path('feed/', LatestPostsFeed(), name="posts-feed")
+    path('feed/', AtomSiteNewsFeed(), name="posts-feed")
 ]
