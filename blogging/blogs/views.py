@@ -36,6 +36,10 @@ def post_list_view(request, *args, **kwargs):
         tag_list = list(Tag.objects.values('id').filter(slug__in=tag_slug))
         posts = posts.filter(tags__in=[t['id'] for t in tag_list]).distinct()
 
+    if request.GET.get('search'):
+        request_search = request.GET.get('search')
+        posts = posts.filter(body__search=request_search)
+
     paginator = Paginator(posts, settings.PAGINATION_SIZE)
     requested_page_number = request.GET.get('page')
     try:
