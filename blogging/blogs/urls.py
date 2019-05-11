@@ -10,6 +10,8 @@ from .views import (
     PostDeleteView
 )
 
+from .feeds import LatestPostsFeed
+
 app_name = "blogs"
 
 # Post CRUD
@@ -34,4 +36,8 @@ urlpatterns = [
 # Email
 urlpatterns += [
     path('posts/share/<int:post_id>', post_share, name="posts-email-share")
+]
+
+urlpatterns += [
+    path('feed/', LatestPostsFeed(), name="posts-feed")
 ]

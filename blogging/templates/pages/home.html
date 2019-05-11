@@ -1,17 +1,62 @@
 {% extends 'base.html' %}
 
+{% load blog_tags %}
+
 {% block title %}
 <div>
-    <h4>
-        Home
-    </h4>
+    <div>
+        <h4>
+            Home
+        </h4>
+    </div>
 </div>
 {% endblock %}
 
 {% block content %}
+<div class="common-header">
+    <div>
+        <p>
+            It is a simple blogging website with many extraordinary features
+        </p>
+    </div>
+    <div>
+        <a href="{% url 'blogs:posts-feed' %}">
+            Subscribe to my RSS feed
+        </a>
+    </div>
+</div>
 <div>
-    <p>
-        It is a simple blogging website with many extraordinary features
-    </p>
+    <div class="card box-shadow-hover">
+        <div class="m-3">
+            <div class="common-header">
+                <h4>
+                    Latest Posts
+                </h4>
+            </div>
+            <div>
+                {% show_latest_posts %}
+            </div>
+            <div>
+                This site contains {% total_posts %} posts so far </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-3">
+    <div class="card box-shadow-hover">
+        <div class="m-3">
+            <div class="common-header">
+                <h4>
+                    Most Commented Posts
+                </h4>
+            </div>
+            <div>
+                {% show_most_commented_posts %}
+            </div>
+            <div>
+                This site contains {% total_posts %} posts so far </p>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

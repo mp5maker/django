@@ -47,3 +47,28 @@
 ### templates.blogs.posts.list.html ###
 
     <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+
+### Pg Admin ###
+
+    sudo apt-get install libpq-dev python-dev
+    sudo apt-get install postgresql postgresql-contrib
+
+    sudo passwd postgres
+    sudo -u postgres psql
+    ALTER USER postgres PASSWORD 'postgres';
+    locate pg_hba.conf
+    copy /etc/postgresql/10/main/pg_hba.conf
+    sudo nano /etc/postgresql/10/main/pg_hba.conf
+
+    local | all | postgres | peer
+    ----- |---- |--------- |-----
+    local | all | postgres | trust
+
+    sudo service postgresql restart
+
+    su postgres
+
+    psql
+    CREATE USER sample_user WITH PASSWORD 'sample_password';
+    CREATE DATABASE sample_database WITH OWNER sample_user;
+    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO sample_user;
