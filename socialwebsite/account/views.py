@@ -4,6 +4,10 @@ from django.http import HttpResponse
 
 from django.contrib.auth import authenticate, login
 
+from django.contrib.auth.decorators import login_required
+
+from django.urls import reverse_lazy
+
 from .forms import LoginForm
 
 
@@ -28,3 +32,7 @@ def user_login(request, *args, **kwargs):
     else:
         form = LoginForm()
     return render(request, 'accounts/login.html', {"form": form})
+
+@login_required(login_url=reverse_lazy('accounts:login'))
+def dashboard(request, *args, **kwargs):
+    return render(request, 'accounts/dashboard.html', {"section": 'dashboard'});

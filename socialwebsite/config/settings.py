@@ -128,4 +128,11 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
 
+LOGIN_URL = 'accounts:login'
+LOGOUT_URL = 'accounts:logout'
+LOGIN_REDIRECT_URL = 'accounts:dashboard'
+LOGOUT_REDIRECT_URL = 'accounts:login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 django_heroku.settings(locals())
