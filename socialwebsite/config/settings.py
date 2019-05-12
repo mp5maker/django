@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'social_django',
 
     # App
-    'account'
+    'account',
+    # 'images',
 ]
 
 AUTHENTICATION_BACKENDS = [
