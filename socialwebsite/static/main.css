@@ -33,6 +33,10 @@ body {
     display: block;
 }
 
+ul.messages {
+    padding-left: 0;
+}
+
 body > .container-fluid {
     min-height: calc(100vh - 60px);
 }
