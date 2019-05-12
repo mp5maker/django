@@ -19,12 +19,29 @@
 
 {% block content %}
 <div>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <p>
-            <input type="submit" value="Login" class="btn btn-primary"/>
-        </p>
-    </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <p>
+                        <input type="submit" value="Login" class="btn btn-primary"/>
+                    </p>
+                </form>
+            </div>
+            <div class="col">
+                <div class="social">
+                    <ul class="list-group">
+                        <li class="facebook list-group-item">
+                            <a href="{% url 'social:begin' 'facebook' %} ">
+                                Sign in with facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -107,3 +107,6 @@ __pycache__
 
 # statcifiles
 staticfiles
+
+# gitignore
+settings-bak.py

@@ -33,9 +33,18 @@ INSTALLED_APPS = [
     'crispy_forms',
     'whitenoise.runserver_nostatic',
     'django_extensions',
+    'social_django',
 
     # App
     'account'
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.GoogleOAuth2',
 ]
 
 MIDDLEWARE = [
@@ -134,5 +143,12 @@ LOGIN_REDIRECT_URL = 'accounts:dashboard'
 LOGOUT_REDIRECT_URL = 'accounts:login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '***'
+SOCIAL_AUTH_FACEBOOK_SECRET = '****'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_TWITTER_KEY = '*****'
+SOCIAL_AUTH_TWITTER_SECRET = '****'
 
 django_heroku.settings(locals())
