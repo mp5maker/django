@@ -2,7 +2,9 @@ from django.urls import path, re_path
 
 from .views import (
     user_login,
-    dashboard
+    dashboard,
+    register,
+    edit
 )
 
 from django.contrib.auth.views import (
@@ -58,5 +60,7 @@ urlpatterns = [
     ),
         name="password-reset-complete"
     ),
+    path('registration/', register, name="signup"),
+    path('edit/', edit, name="edit"),
     path('dashboard/', dashboard, name="dashboard"),
 ]
