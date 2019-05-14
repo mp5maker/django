@@ -36,8 +36,7 @@ INSTALLED_APPS = [
     'social_django',
 
     # App
-    'account',
-    # 'images',
+    'account'
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -136,7 +135,7 @@ STATICFILES_ROOT = [os.path.join(BASE_DIR, 'staticfiles')]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-CRISPY_TEMPLATE_PACK='bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_URL = 'accounts:login'
 LOGOUT_URL = 'accounts:logout'
@@ -145,11 +144,14 @@ LOGOUT_REDIRECT_URL = 'accounts:login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '***'
+SOCIAL_AUTH_FACEBOOK_KEY = '*****'
 SOCIAL_AUTH_FACEBOOK_SECRET = '****'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 SOCIAL_AUTH_TWITTER_KEY = '*****'
-SOCIAL_AUTH_TWITTER_SECRET = '****'
+SOCIAL_AUTH_TWITTER_SECRET = '*****'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '*****'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '***'
 
 django_heroku.settings(locals())
