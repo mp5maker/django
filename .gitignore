@@ -109,4 +109,4 @@ __pycache__
 staticfiles
 
 # gitignore
-settings-bak.py
+socialwebsite/config/settings-bak.py
