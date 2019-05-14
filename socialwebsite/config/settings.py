@@ -34,9 +34,11 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django_extensions',
     'social_django',
+    'reset_migrations',
 
     # App
-    'account'
+    'account',
+    'picture'
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -87,7 +89,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'photon.sqlite3'),
     }
 }
 

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 <div>
     <h4>
@@ -24,6 +26,20 @@
             </a>
         </div>
     </div>
-
+</div>
+<div>
+    {% with total_images_created=request.user.images_created_count %}
+        <p>
+            Welcome to the Dashboard. You have bookmarked {{ total_images_created }}
+            images{{ total_images_created|pluralize }}.
+        </p>
+    {% endwith %}
+        <p>
+            Drag the following button to your bookmarks toolbar to bookmark images
+            from other websites
+            <a href="{% static 'main.jquery.js' %}" class="btn btn-success">
+                Bookmark it
+            </a>
+        <p>
 </div>
 {% endblock %}
