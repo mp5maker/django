@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+<div>
+    <h4>
+        Sign Up Confirmation
+    </h4>
+</div>
+<div>
+    <a href="{% url 'pages:dashboard' %}">
+        Login
+    </a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div>
+    <p class="text-success">
+        Welcome, {{ new_user.username }}
+        Successfully Registered in our website!
+        Your account has been successfully created!
+    </p>
+</div>
+{% endblock %}

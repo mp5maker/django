@@ -13,12 +13,16 @@ from django.contrib.auth.views import (
 
 from django.urls import reverse_lazy
 
-from .views import user_login
+from .views import (
+    user_login,
+    register
+)
 
 app_name = 'account'
 
 urlpatterns = [
     # path('login/', user_login, name='login'),
+    path('signup/', register, name='signup'),
     path('login/', LoginView.as_view(
         template_name="account/login.html",
     ), name='login'),
