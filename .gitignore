@@ -111,3 +111,6 @@ staticfiles
 
 # gitignore
 socialwebsite/config/settings-bak.py
+
+# Social Authentication
+social-app.txt

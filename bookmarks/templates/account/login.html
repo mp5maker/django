@@ -6,10 +6,23 @@
         Login
     </h4>
 </div>
-<div>
-    <a href="{% url 'pages:dashboard' %}">
-        Go Back
-    </a>
+<div class="common-header">
+    <div>
+        <a href="{% url 'pages:dashboard' %}">
+            Go Back
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'social:begin' 'facebook' %}" class="text-primary">
+            <i class="fab fa-facebook"></i>
+        </a>
+        <a href="{% url 'social:begin' 'twitter' %}" class="text-info">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="{% url 'social:begin' 'google-oauth2' %}" class="text-success">
+            <i class="fab fa-google-plus"></i>
+        </a>
+    </div>
 </div>
 {% endblock %}
 
