@@ -36,6 +36,10 @@ body > .container-fluid {
     box-shadow: 0 1px 15px 0 lightgrey;
 }
 
+.navbar-brand-margin-tweak {
+    margin-left: 14px;
+}
+
 footer {
     height: 60px;
     width: 100%;

@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
 
     # App
-    'account'
+    'pages',
+    'account',
 
 ]
 
@@ -128,8 +129,9 @@ STATIC_ROOT = [ os.path.join(BASE_DIR, 'staticfiles') ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = 'account:login'
-LOGOUT_REDIRECT_URL = 'account:login'
+LOGIN_REDIRECT_URL = 'pages:dashboard'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 django_heroku.settings(locals())
 

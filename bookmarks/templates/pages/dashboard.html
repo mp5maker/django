@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<div>
+    <h4>
+        Dashboard
+    </h4>
+</div>
+<div class="common-header">
+    <div>
+        <a href="#">
+            Images
+        </a>
+        <span>/</span>
+        <a href="#">
+            People
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'account:password-change' %}">
+            Password Change
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div>
+    Lorem ipsum dolor sit amet.
+</div>
+{% endblock %}
