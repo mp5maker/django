@@ -15,7 +15,8 @@ from django.urls import reverse_lazy
 
 from .views import (
     user_login,
-    register
+    register,
+    edit
 )
 
 app_name = 'account'
@@ -52,4 +53,5 @@ urlpatterns = [
     path('password-reset/complete/', PasswordResetCompleteView.as_view(
         template_name="account/password-reset-complete.html",
     ), name="password-reset-complete"),
+    path('profile/edit/', edit, name="profile-edit"),
 ]

@@ -6,11 +6,15 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate, login
 
+from django.contrib.auth.decorators import login_required
+
 from django.urls import reverse_lazy
 
 from .forms import (
     LoginForm,
-    UserRegistrationForm
+    UserRegistrationForm,
+    UserEditForm,
+    ProfileEditForm
 )
 
 def user_login(request):
@@ -48,3 +52,25 @@ def register(request, *args, **kwargs):
     else:
         form = UserRegistrationForm()
     return render(request, 'account/signup.html', { "form": form })
+
+@login_required(login_url=reverse_lazy('account:login'))
+def edit(request, *args, **kwargs):
+    if request.method == "POST":
+        user_edit_form = UserEditForm(
+            instance=request.user,
+            data=request.POST
+        )
+        profile_edit_form = ProfileEditForm(
+            instance=request.user.profile,
+            data=request.POST,
+            files=request.FILES
+        )
+        if user_edit_form.is_valid() and profile_edit_form.is_valid():
+            user_edit_form.save()
+            profile_edit_form.save()
+    else:
+        user_edit_form = UserEditForm(instance=request.user)
+        profile_edit_form = ProfileEditForm(instance=request.user.profile)
+    return render(request, 'account/profile-edit.html', {
+        "forms" : [user_edit_form, profile_edit_form]
+    })
