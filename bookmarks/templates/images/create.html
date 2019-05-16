@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<div>
+    <h4>
+        Bookmark an Image
+    </h4>
+</div>
+<div class="common-header">
+    <div>
+        <a href="{% url 'pages:dashboard' %}">
+            Go Back
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div>
+                    <img src="{{ request.GET.url }}" class="image-preview">
+                </div>
+            </div>
+            <div class="col">
+                {% include 'layouts/form.html' with color="primary" submit_name="Bookmark it!" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
