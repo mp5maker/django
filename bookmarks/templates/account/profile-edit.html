@@ -14,5 +14,6 @@
 {% endblock %}
 
 {% block content %}
+    {% include 'layouts/alert.html' %}
     {% include 'layouts/multipart-form.html' with color="primary" submit_name="Save Changes" %}
 {% endblock %}
