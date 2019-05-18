@@ -1,4 +1,5 @@
 import os
+from django.urls import reverse_lazy
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -157,6 +158,12 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '***'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '***'
 
 PAGE_SIZE = 5
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda user: reverse_lazy('account:details' , kwargs={
+        "username": user.username
+    })
+}
 
 django_heroku.settings(locals())
 

@@ -55,6 +55,20 @@ body > .container-fluid {
     cursor: pointer;
 }
 
+.row.equal  [class|='col'] div {
+    height: 100%;
+}
+
+.img-hover {
+    transition: transform linear 0.25s;
+    transform: scale(0.9)
+}
+
+.img-hover:hover {
+    transition: transform linear 0.25s;
+    transform: scale(1)
+}
+
 footer {
     height: 60px;
     width: 100%;

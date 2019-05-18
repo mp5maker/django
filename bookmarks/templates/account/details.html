@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<div>
+    <h4>
+        People
+    </h4>
+</div>
+<div class="common-header">
+    <a href="{% url 'account:list' %}">
+        Go Back
+    </a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row equal">
+    <div class="col-sm-2">
+        <div class="card box-shadow-hover cursor-pointer">
+            <div>
+                {% load thumbnail %}
+                {% thumbnail user.profile.photo "300" as im %}
+                    <a href="{{ im.url }}">
+                        <img src="{{ im.url }}" class="card-img-top img-hover" />
+                    </a>
+                {% endthumbnail %}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <div class="card box-shadow-hover cursor-pointer">
+            <div class="card-body">
+                <div class="card-text">
+                    <strong>
+                        {{ user.username }}
+                    </strong>
+                </div>
+                <div class="card-text text-capitalize">
+                    {{ user.first_name }} {{ user.last_name }}
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-text text-capitalize">
+                    Joined In: {{ user.date_joined }}
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-text text-capitalize">
+                    Active Last: {{ user.last_login }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

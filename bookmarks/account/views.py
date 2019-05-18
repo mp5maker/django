@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from django.http import HttpResponse
 
@@ -79,3 +79,15 @@ def edit(request, *args, **kwargs):
     return render(request, 'account/profile-edit.html', {
         "forms" : [user_edit_form, profile_edit_form]
     })
+
+@login_required(login_url="account:login")
+def user_list(request, *args, **kwargs):
+    users = User.objects.filter(is_active=True)
+    return render(request, "account/list.html", { "users": users, "section": "people"})
+
+@login_required(login_url="account:login")
+def user_detail(request, *args, **kwargs):
+    username = kwargs.get('username')
+    print(username)
+    user = get_object_or_404(User, username=username,  is_active=True)
+    return render(request, "account/details.html", { "user" : user, "section": "people"})

@@ -54,5 +54,11 @@
             const url = '/images/details'
             window.location.href = `${url}/${id}/${slug}/`;
         })
+
+        $('.on-user-card-click').click(function() {
+            const username = $(this).data('username');
+            const url = '/account/details'
+            window.location.href = `${url}/${username}/`;
+        })
     }
 })();

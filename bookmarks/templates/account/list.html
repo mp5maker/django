@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<div>
+    <h4>
+        People
+    </h4>
+</div>
+<div class="common-header">
+    <a href="{% url 'pages:dashboard' %}">
+        Go Back
+    </a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div>
+    {% for user in users %}
+        <div class="card box-shadow-hover d-inline-block mr-3">
+            {% load thumbnail %}
+            {% thumbnail user.profile.photo "300" as im %}
+                <a href="{{ im.url }}">
+                    <img src = "{{ im.url }}" class="card-img-top"/>
+                </a>
+            {% endthumbnail %}
+            <div
+                class="on-user-card-click"
+                data-username="{{ user.username }}">
+                <div class="card-body">
+                    <div class="card-text">
+                        {{ user.username }}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        Joined In: {{ user.date_joined }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
