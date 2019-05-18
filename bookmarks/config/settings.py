@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
 
     # App
+    'common',
     'pages',
     'account',
     'images',
@@ -154,6 +155,8 @@ SOCIAL_AUTH_TWITTER_SECRET = '***'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '***'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '***'
+
+PAGE_SIZE = 5
 
 django_heroku.settings(locals())
 

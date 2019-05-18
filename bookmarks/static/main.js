@@ -46,5 +46,13 @@
                 }
             })
         })
+
+        $('.on-card-click').click(function(event) {
+            event.preventDefault();
+            const id = $(this).data('id');
+            const slug = $(this).data('slug');
+            const url = '/images/details'
+            window.location.href = `${url}/${id}/${slug}/`;
+        })
     }
 })();

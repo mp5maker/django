@@ -15,13 +15,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link dashboard-nav" href="{% url 'pages:dashboard' %}">
                         Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link images-nav" href="#">
+                    <a class="nav-link images-nav"  href="{% url 'images:list' %}">
                         Images
                     </a>
                 </li>

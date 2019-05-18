@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<div>
+    <h4>Images Lists</h4>
+</div>
+<div class="common-header">
+    <div>
+        <a href="{% url 'pages:dashboard' %}">
+            <code class="text-primary">
+                Go Back
+            </code>
+        </a>
+    </div>
+    <div>
+        {% include 'layouts/pagination.html' with pages=images %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% for image in images %}
+    <div class="card d-inline-block box-shadow-hover cursor-pointer mr-4" style="width: 18rem;">
+        {% load thumbnail %}
+        {% thumbnail image.image "500" as im %}
+        <a href="{{ im.url }}">
+            <img src="{{ im.url }}" class="card-img-top">
+        </a>
+        {% endthumbnail %}
+        <div
+            class="card-body on-card-click"
+            data-id="{{ image.id }}"
+            data-slug="{{ image.slug }}">
+            <h5 class="card-title">
+                {{ image.title }}
+            </h5>
+            <p class="card-text">
+                {{ image.description }}
+            </p>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -32,8 +32,13 @@ body > .container-fluid {
     box-shadow: 0 1px 15px 0 lightgrey;
 }
 
+.box-shadow-hover {
+    transition: box-shadow linear 0.25s;
+}
+
 .box-shadow-hover:hover {
     box-shadow: 0 1px 15px 0 lightgrey;
+    transition: box-shadow linear 0.25s;
 }
 
 .navbar-brand-margin-tweak {
@@ -44,6 +49,10 @@ body > .container-fluid {
     border: 1px solid lightgrey;
     border-radius: 10px;
     padding: 5px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 footer {

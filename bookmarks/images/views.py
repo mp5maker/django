@@ -6,7 +6,13 @@ from django.views.decorators.http import require_POST
 
 from django.contrib import messages
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+from django.conf import settings
+
+from common.decorators import ajax_required
 
 from .forms import ImageCreateForm
 
@@ -41,6 +47,7 @@ def image_details(request, *args, **kwargs):
     )
 
 @login_required(login_url="account:login")
+@ajax_required
 @require_POST
 def image_like(request, *args, **kwargs):
     image_id = request.POST.get('id')
@@ -56,3 +63,19 @@ def image_like(request, *args, **kwargs):
         except:
             pass
     return JsonResponse({'status': '404'})
+
+@login_required(login_url="accounts:login")
+def image_list(request, *args, **kwargs):
+    images = Image.objects.all()
+    paginator = Paginator(images, settings.PAGE_SIZE)
+    page = request.GET.get('page')
+    try:
+        images = paginator.get_page(page)
+    except PageNotAnInteger:
+        images = paginator.get_page(1)
+    except EmptyPage:
+        images = paginator.get_page(paginator.num_pages)
+    return render(request, 'images/list.html', {
+        "section": "images",
+        "images": images
+    })
