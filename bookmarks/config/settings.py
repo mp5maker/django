@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'whitenoise.runserver_nostatic',
     'social_django',
+    'sorl.thumbnail',
 
     # App
     'pages',

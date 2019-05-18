@@ -40,6 +40,12 @@ body > .container-fluid {
     margin-left: 14px;
 }
 
+.count {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 5px;
+}
+
 footer {
     height: 60px;
     width: 100%;
