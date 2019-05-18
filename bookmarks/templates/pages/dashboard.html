@@ -30,6 +30,19 @@
 
 {% block content %}
 <div>
-    Welcome to your dashboard.
+    {% with total_images_created=request.user.images_created.count %}
+        <p>
+            Welcome to your dashboard.
+            You have bookmarked {{ total_images_created }} image{{ total_images_created|pluralize }}
+        </p>
+        <p>
+            Drag the following button to your bookmarks toolbar to bookmark images
+            from other websites
+            <a
+                class="btn btn-secondary"
+                href="javascript:{% include 'root/bookmarklet_launcher.js' %}">
+            </a>
+        </p>
+    {% endwith %}
 </div>
 {% endblock %}
