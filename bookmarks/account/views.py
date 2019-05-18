@@ -19,6 +19,8 @@ from .forms import (
     ProfileEditForm
 )
 
+from images.models import Image
+
 def user_login(request):
     if request.method == 'POST':
         form =  LoginForm(request.POST)
@@ -88,6 +90,9 @@ def user_list(request, *args, **kwargs):
 @login_required(login_url="account:login")
 def user_detail(request, *args, **kwargs):
     username = kwargs.get('username')
-    print(username)
     user = get_object_or_404(User, username=username,  is_active=True)
-    return render(request, "account/details.html", { "user" : user, "section": "people"})
+    print(dir(user))
+    return render(request, "account/details.html", {
+        "user" : user,
+        "section": "people",
+    })

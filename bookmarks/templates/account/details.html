@@ -52,4 +52,61 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-text">
+                    <div class="common-header">
+                        <div>
+                            {% with total_follow=user.followers.count %}
+                                <span class="count">
+                                    <span class="total">
+                                        {{ total_follow }}
+                                    </span>
+                                    follower{{ total_follow|pluralize }}
+                                </span>
+                            {% endwith %}
+                        </div>
+                        <div class="mt-2">
+                            <a
+                                data-id="{{ user.id }}"
+                                data-action="{% if request.user in user.followers.all %}un{% endif %}like"
+                                class="btn btn-white text-danger">
+                                {% if request.user not in user.followers.all %}
+                                    <i class="far fa-heart"></i>
+                                {% else %}
+                                    <i class="fas fa-heart"></i>
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for image in user.images_created.all  %}
+            <div class="card">
+                {% load thumbnail %}
+                {% thumbnail image.image "300" as im %}
+                    <a href="{{ im.url }}">
+                        <img src="{{ im.url }}" alt="" class="card-img-top">
+                    </a>
+                {% endthumbnail %}
+                <div class="card-body">
+                    <div class="card-text">
+                        {{ image.title }}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-text">
+                        No images posted yet!
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
