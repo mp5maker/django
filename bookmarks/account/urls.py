@@ -18,7 +18,8 @@ from .views import (
     register,
     edit,
     user_list,
-    user_detail
+    user_detail,
+    user_follow
 )
 
 app_name = 'account'
@@ -58,4 +59,5 @@ urlpatterns = [
     path('profile/edit/', edit, name="profile-edit"),
     path('', user_list, name="list"),
     path('details/<username>/', user_detail, name="details"),
+    path('follow/', user_follow, name="follow"),
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from django.contrib.auth.models import User
 
@@ -12,6 +12,8 @@ from django.contrib import messages
 
 from django.urls import reverse_lazy
 
+from django.views.decorators.http import require_POST
+
 from .forms import (
     LoginForm,
     UserRegistrationForm,
@@ -19,7 +21,7 @@ from .forms import (
     ProfileEditForm
 )
 
-from images.models import Image
+from .models import Contact
 
 def user_login(request):
     if request.method == 'POST':
@@ -91,8 +93,28 @@ def user_list(request, *args, **kwargs):
 def user_detail(request, *args, **kwargs):
     username = kwargs.get('username')
     user = get_object_or_404(User, username=username,  is_active=True)
-    print(dir(user))
     return render(request, "account/details.html", {
         "user" : user,
         "section": "people",
     })
+
+@login_required(login_url="account:login")
+@require_POST
+@login_required
+def user_follow(request):
+    user_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if user_id and action:
+        try:
+            user = User.objects.get(id=user_id)
+            if action == 'follow':
+                Contact.objects.get_or_create(
+                    user_from=request.user,
+                    user_to=user
+                )
+            else:
+                Contact.objects.filter(user_from=request.user, user_to=user).delete()
+            return JsonResponse({'status': 'ok'})
+        except User.DoesNotExist:
+            return JsonResponse({'status': "User doesn't exist"})
+    return JsonResponse({"status": "Bad Request"})

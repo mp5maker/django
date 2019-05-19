@@ -60,7 +60,7 @@
                     <div class="common-header">
                         <div>
                             {% with total_follow=user.followers.count %}
-                                <span class="count">
+                                <span class="count followers">
                                     <span class="total">
                                         {{ total_follow }}
                                     </span>
@@ -70,9 +70,10 @@
                         </div>
                         <div class="mt-2">
                             <a
+                                data-url="{% url 'account:follow' %}"
                                 data-id="{{ user.id }}"
-                                data-action="{% if request.user in user.followers.all %}un{% endif %}like"
-                                class="btn btn-white text-danger">
+                                data-action="{% if request.user in user.followers.all %}un{% endif %}follow"
+                                class="btn btn-white text-danger follow">
                                 {% if request.user not in user.followers.all %}
                                     <i class="far fa-heart"></i>
                                 {% else %}
