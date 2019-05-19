@@ -47,7 +47,10 @@ def image_details(request, *args, **kwargs):
     slug = kwargs.get('slug')
     image = get_object_or_404(Image, id = id, slug=slug)
     # Namespace:id:field
-    total_views = redis_cache().incr('image:{}:views'.format(image.id))
+    redis = redis_cache()
+    total_views = redis.incr('image:{}:views'.format(image.id))
+    redis.zincrby('image_ranking', image.id, 1)
+
     return render(
         request, 'images/details.html', {
             "section": "images",
@@ -74,7 +77,7 @@ def image_like(request, *args, **kwargs):
             pass
     return JsonResponse({'status': '404'})
 
-@login_required(login_url="accounts:login")
+@login_required(login_url="account:login")
 def image_list(request, *args, **kwargs):
     images = Image.objects.all()
     paginator = Paginator(images, settings.PAGE_SIZE)
