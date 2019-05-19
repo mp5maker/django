@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'pages',
     'account',
     'images',
+    'actions',
 
 ]
 
@@ -164,6 +165,10 @@ ABSOLUTE_URL_OVERRIDES = {
         "username": user.username
     })
 }
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
 
 django_heroku.settings(locals())
 

@@ -29,9 +29,14 @@
             <div class="col-sm-10">
                 {% with total_likes=image.users_like.count users_like=image.users_like.all %}
                     <div class="image-info">
-                        <div>
+                        <div class="d-inline-block">
                             <span class="count">
                                 {{ total_likes }} like{{ total_likes|pluralize }}
+                            </span>
+                        </div>
+                        <div class="d-inline-block">
+                            <span class="count">
+                                {{ total_views }} view{{ total_views|pluralize }}
                             </span>
                         </div>
                         <div class="my-3">

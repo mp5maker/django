@@ -14,9 +14,15 @@ from django.conf import settings
 
 from common.decorators import ajax_required
 
+from django.conf import settings
+
+from common.utils import redis_cache
+
 from .forms import ImageCreateForm
 
 from .models import Image
+
+from actions.utils import create_action
 
 @login_required(login_url="account:login")
 def image_create(request):
@@ -27,6 +33,7 @@ def image_create(request):
             new_item = form.save(commit=False)
             new_item.user = request.user
             new_item.save()
+            create_action(request.user, 'bookmarked image', new_item)
             messages.success(request, 'Images Added Successfully')
             return redirect(new_item.get_absolute_url())
     else:
@@ -39,10 +46,13 @@ def image_details(request, *args, **kwargs):
     id = kwargs.get('id')
     slug = kwargs.get('slug')
     image = get_object_or_404(Image, id = id, slug=slug)
+    # Namespace:id:field
+    total_views = redis_cache().incr('image:{}:views'.format(image.id))
     return render(
         request, 'images/details.html', {
             "section": "images",
-            "image": image
+            "image": image,
+            "total_views": total_views
         }
     )
 

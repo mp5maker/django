@@ -46,4 +46,27 @@
         </p>
     {% endwith %}
 </div>
+<div class="row">
+    <div class="col-sm-6">
+        <h5>What's happening</h5>
+        <div id="action-list">
+            {% for action in actions %}
+                {% include "actions/detail.html" %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h5>Popular Images</h5>
+        <div id="popular-images-list">
+            {% load thumbnail %}
+            {% for image in images_by_popularity %}
+                {% thumbnail image.image "80x80" crop="100%" as im %}
+                    <a href="{{ image.get_absolute_url }}">
+                        <img src="{{ im.url }}" class="item-img" />
+                    </a>
+                {% endthumbnail %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

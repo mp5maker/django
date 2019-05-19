@@ -23,6 +23,8 @@ from .forms import (
 
 from .models import Contact
 
+from actions.utils import create_action
+
 def user_login(request):
     if request.method == 'POST':
         form =  LoginForm(request.POST)
@@ -54,6 +56,7 @@ def register(request, *args, **kwargs):
                 form.cleaned_data['password']
             )
             new_user.save()
+            create_action(new_user, 'has created an account')
             return render(request, 'account/signup-done.html', {"new_user": new_user})
     else:
         form = UserRegistrationForm()
@@ -112,6 +115,7 @@ def user_follow(request):
                     user_from=request.user,
                     user_to=user
                 )
+                create_action(request.user, 'is following', user)
             else:
                 Contact.objects.filter(user_from=request.user, user_to=user).delete()
             return JsonResponse({'status': 'ok'})
