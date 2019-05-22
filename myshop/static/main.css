@@ -1,0 +1,40 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body > .container-fluid {
+    min-height: calc(100vh - 60px)
+}
+
+.container-fluid .common-header div {
+    display: inline-block;
+}
+
+.common-header div:last-child {
+    float: right;
+}
+
+.common-header::before, .common-header::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+footer {
+    border-top: 1px solid lightgrey;
+    height: 60px;
+    line-height: 60px;
+}
+
+footer div {
+    text-align: center;
+}
+
+.box-shadow {
+    transition: all linear 0.25s;
+}
+
+.box-shadow:hover {
+    box-shadow: 0 1px 15px 0 lightgrey;
+}
