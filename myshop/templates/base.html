@@ -19,6 +19,10 @@
     {% include 'layouts/navbar.html' %}
     <div class="container-fluid">
         <div class="row">
+            <div class="col sidebar">
+                {% block sidebar %}
+                {% endblock %}
+            </div>
             <div class="col">
                 {% block title %}
                 {% endblock %}
