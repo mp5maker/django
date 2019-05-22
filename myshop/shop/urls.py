@@ -10,5 +10,5 @@ app_name = "shop"
 urlpatterns = [
     path('', product_list, name="product-list"),
     path('<slug:category_slug>/', product_list, name="product-list-category"),
-    path('detail/<int:id>/<slug:slug/', product_detail, name="product-detail"),
+    path('detail/<int:id>/<slug:slug>/', product_detail, name="product-detail"),
 ]

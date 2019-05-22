@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import (
     Category,
@@ -9,7 +9,7 @@ def product_list(request, *args, **kwargs):
     category = None
     products = None
     categories = Category.objects.all()
-    product = Product.objects.filter(available=True)
+    products = Product.objects.filter(available=True)
     category_slug = kwargs.get('category_slug')
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -27,9 +27,11 @@ def product_list(request, *args, **kwargs):
 def product_detail(request, *args, **kwargs):
     id = kwargs.get('id')
     slug = kwargs.get('slug')
+    print(id)
+    print(slug)
     product = get_object_or_404(Product, id=id, slug=slug)
     return render(
         request,
-        'shop/product/details.html',
-        {"product": product}
+        'shop/product/detail.html',
+        {"product": product }
     )
