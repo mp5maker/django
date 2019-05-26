@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<div class="my-3">
+    <h4>
+        Product List
+    </h4>
+</div>
+<div class="common-header my-3">
+    <div>
+        <a href="{% url 'shop:product-list' %}">
+            Go Back
+        </a>
+    </div>
+    <div>
+        Right
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="my-3">
+    <div class="card d-inline-block m-2 w-25">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" class="card-img-top" />
+        {% else %}
+        <img src="{% static 'img/no-image.png' %}" class="card-img-top" />
+        {% endif %}
+        <div class="card-body">
+            <div class="card-title">
+                {{ product.name }}
+            </div>
+            <div class="card-text">
+                Price: {{ product.price }}
+            </div>
+            <div class="card-text">
+                <a href="{{ product.category.get_absolute_url }}">
+                    Category: {{ product.category }}
+                </a>
+            </div>
+            <div class="card-text">
+                Description: {{ product.description|linebreaks }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
