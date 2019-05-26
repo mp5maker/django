@@ -39,7 +39,19 @@
             Left
         </div>
         <div>
-            Right
+            <div class="cart">
+                {% with total_items=cart|length %}
+                    {% if cart|length > 0 %}
+                        Your cart:
+                        <a href="{% url 'cart:cart-detail' %}" class="text-secondary">
+                            {{ total_items }} item{{ total_items|pluralize }}
+                            ${{ cart.get_total_price }}
+                        </a>
+                    {% else %}
+                        Your cart is empty
+                    {% endif %}
+                {% endwith %}
+            </div>
         </div>
     </div>
 {% endblock %}
