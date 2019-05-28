@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'orders',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,16 @@ CART_SESSION_ID = 'cart'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+BRAINTREE_MERCHANT_ID = ''
+BRAINTREE_PUBLIC_KEY = ''
+BRAINTREE_PRIVATE_KEY = ''
+
+# from braintree import Configuration, Environment
+
+# Configuration.configure(
+#     Environment.Sandbox,
+#     BRAINTREE_MERCHANT_ID,
+#     BRAINTREE_PUBLIC_KEY,
+#     BRAINTREE_PRIVATE_KEY
+# )
