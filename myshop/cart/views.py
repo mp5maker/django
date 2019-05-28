@@ -8,6 +8,7 @@ from .cart import Cart
 
 from .forms import CartAddProductForm
 
+from coupons.forms import CouponApplyForm
 
 @require_POST
 def cart_add(request, product_id, *args, **kwargs):
@@ -41,4 +42,5 @@ def cart_detail(request):
                 'update': True
             }
         )
+    coupon_apply_form = CouponApplyForm()
     return render(request, 'cart/detail.html', { 'cart': cart })
