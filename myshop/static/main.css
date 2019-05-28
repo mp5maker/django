@@ -66,6 +66,23 @@ body > .container-fluid > .row > .col:first-child.sidebar div ul li a {
     display: block;
 }
 
+.order-info span.text-right {
+    float: right !important;
+}
+
+.order-info li::before, .order-info li::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.order-info ul {
+    list-style-type: none;
+    padding-left: 0;
+    border: 1px solid lightgrey;
+    padding: 5px;
+}
+
 footer {
     border-top: 1px solid lightgrey;
     height: 60px;
