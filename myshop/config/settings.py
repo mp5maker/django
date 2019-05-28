@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Third Party App
     'django_extensions',
     'crispy_forms',
+    'weasyprint',
 
     # My App
     'common',
