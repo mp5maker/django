@@ -1,0 +1,30 @@
+[
+{
+  "model": "orders.order",
+  "pk": 1,
+  "fields": {
+    "first_name": "Photon",
+    "last_name": "Khan",
+    "email": "khan.photon@gmail.com",
+    "address": "Eastern Point",
+    "postal_code": "1217",
+    "city": "Dhaka",
+    "created": "2019-05-28T12:07:59.962Z",
+    "updated": "2019-05-28T12:07:59.962Z",
+    "paid": false,
+    "braintree_id": "",
+    "coupon": null,
+    "discount": 0
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "product": 1,
+    "price": "350.00",
+    "quantity": 1
+  }
+}
+]
