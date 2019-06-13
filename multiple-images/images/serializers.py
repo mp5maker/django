@@ -28,13 +28,11 @@ class ImagesSerializer(ModelSerializer):
         )
 
 
-class ImageDescriptionSerializer(ModelSerializer):
-    images = ImagesSerializer()
+class DescriptionSerializer(ModelSerializer):
 
     class Meta:
         model = Description
         fields = CommonSerializer.Meta.fields + (
             'description',
-            'images'
         )
 
